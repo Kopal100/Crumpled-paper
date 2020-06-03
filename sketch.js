@@ -4,16 +4,18 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine,world;
-var round,ball;
+var round;
+var B;
 
 function setup() {
   createCanvas(800,400);
 engine = Engine.create()
 world = engine.world;
 
+ B = new baller(100,300)
+  
 
-ball = Bodies.circle(200,100,20);
-round = new pendulum(ball.body,{x:100,y:100});
+round = new pendulum(B.body,{x:400,y:150});
 
 
 
@@ -21,8 +23,14 @@ round = new pendulum(ball.body,{x:100,y:100});
 }
 
 function draw() {
-  background(255,255,255);  
+  background(255,255,20);  
   Engine.update(engine);
+  B.display();
   round.display();
   
+  
+}
+
+function mouseDragged(){
+  Matter.Body.setPosition(B.body,{x:mouseX,y:mouseY})
 }
