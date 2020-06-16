@@ -5,7 +5,8 @@ const Constraint = Matter.Constraint;
 
 var engine,world;
 var round;
-var B;
+var B,G;
+var wall1,wall2;
 
 function setup() {
   createCanvas(800,400);
@@ -16,10 +17,12 @@ world = engine.world;
   
 
 round = new pendulum(B.body,{x:400,y:150});
-
-
-
- 
+G = new ground(400,390,800,10);
+ push();
+fill("green")
+wall1 = new ground(600,335,10,100);
+wall2 = new ground(680,335,10,100);
+ pop();
 }
 
 function draw() {
@@ -27,10 +30,15 @@ function draw() {
   Engine.update(engine);
   B.display();
   round.display();
-  
-  
+  G.display();
+  wall1.display();
+  wall2.display();
+
 }
 
 function mouseDragged(){
   Matter.Body.setPosition(B.body,{x:mouseX,y:mouseY})
+}
+function mouseReleased(){
+  round.fly();
 }
